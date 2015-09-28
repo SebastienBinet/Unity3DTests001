@@ -55,8 +55,8 @@ public class Selected : StateMachineBehaviour {
 		bbb = -101.0f;
 
 		// asserts
-		if (! Level1GameObject) {			Debug.Log("Not Found -tresdfgretw !!");		} 
-		if (! ThisLevelGameObject) {		Debug.Log("Not Found -hjyj5j55j !!");		} 
+		if (! Level1GameObject) {			Debug.Log("========== BUG: Not Found -tresdfgretw !!");		} 
+		if (! ThisLevelGameObject) {		Debug.Log("========== BUG: Not Found -hjyj5j55j !!");		} 
 
 	}
 

@@ -38,7 +38,7 @@ public class SebLevelActivator : MonoBehaviour {
 			Debug.Break();
 			// does not compile - health.MustNotBeEqual(0);
 			// does not compile - Assert.IsTrue(1);
-			Debug.LogError("bug detected. Ref ABC987");
+			Debug.LogError("========== BUG Ref ABC987");
 			return false; // random
 		} else { // no assert
 			float _posZ = _HandModel.GetPalmPosition().z;

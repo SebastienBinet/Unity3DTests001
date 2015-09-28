@@ -3,11 +3,45 @@ using System.Collections;
 
 public class SebObjectTeddyInFire : ObjectHolderDefaultBehaviorScript {
 
+	public GameObject FireGameObject;
+	public GameObject FxFireGameObject;
+	public ParticleSystem FxFireParticleSystem;
+	private Transform tempTransform;
 
 //	public SebObjectTeddyInFire thisScript;
 	// Use this for initialization
 	override public void Start () {
 		base.Start();
+//		tempTransform = ParentGameObject.transform.Find("ObjectHolder");
+//		Debug.Log ("asasas: " + tempTransform);
+//		FireGameObject = tempTransform.gameObject;
+//		Debug.Log ("hghg: " + FireGameObject);
+
+		// find child Fire
+		tempTransform = ThisLevelGameObject.transform.Find("Fire");
+		Debug.Log ("asasas2: " + tempTransform);
+		if (tempTransform) {
+			FireGameObject = tempTransform.gameObject;
+			Debug.Log ("iuiuiu2: " + FireGameObject);
+			// find child Fire.fx_fire
+			tempTransform = FireGameObject.transform.Find("fx_fire");
+			Debug.Log ("asasas3: " + tempTransform);
+			if (tempTransform) {
+				FxFireGameObject = tempTransform.gameObject;
+				Debug.Log ("iuiuiu3: " + FxFireGameObject);
+				// find the component fx_fire."Particle System"
+				FxFireParticleSystem = FxFireGameObject.GetComponent<ParticleSystem>();
+				Debug.Log ("oopooo3: " + FxFireParticleSystem);
+			} else {
+				// assert because bug
+				Debug.LogError ("========== BUG jjujynhhgg");
+			}
+		} else {
+			// assert because bug
+			Debug.LogError ("========== BUG iuiyuy");
+		}
+
+
 	}
 	
 	// Update is called once per frame
@@ -29,12 +63,18 @@ public class SebObjectTeddyInFire : ObjectHolderDefaultBehaviorScript {
 			Vector3 InitialScale = RootAnimatorScript.InitialLocalScale;
 			float ratioCurrentScaleOverInitialScale = currentScale.x / InitialScale.x;
 			Debug.Log ("current ratio=" + ratioCurrentScaleOverInitialScale);
+			if (FxFireParticleSystem) {
+				FxFireParticleSystem.startSize = 0.57f * ratioCurrentScaleOverInitialScale;
+			} else {
+				// assert because bug
+				Debug.LogError ("========== BUG ghgfjjfghj");
+			}
 
 
-		TBD: useGUILayout the ratio Touch ChangeMaterialOnGrab the Fire. fx_fire. startsize
+//		TBD: useGUILayout the ratio Touch ChangeMaterialOnGrab the Fire. fx_fire. startsize
 		} else {
 			// assert because bug
-			Debug.LogError ("ERROR fdasetrgfds");
+			Debug.LogError ("========== BUG fdasetrgfds");
 		}
 	}
 }
