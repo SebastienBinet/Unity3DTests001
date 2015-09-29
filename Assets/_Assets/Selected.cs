@@ -4,25 +4,25 @@ using System.Collections;
 public class Selected : StateMachineBehaviour {
 
 //	public float RatioScaleLevelRoot_c = 0.5f;
-	public float RatioScaleLevel_c = 1.0f;
-	public float DistanceBetweenEachLevelInStack_c = 5;
+	private float RatioScaleLevel_c = 1.0f;
+	private float DistanceBetweenEachLevelInStack_c = 5;
 
-	public SebLevelActivator otherScript;
-	public float      bbb;//A_pproachRatio_0_to_1; // value for bug tracking
-	public float Ratio {
+	private SebLevelActivator otherScript;
+	private float      bbb;//A_pproachRatio_0_to_1; // value for bug tracking
+	private float Ratio {
 		get{ return bbb; }
 	}
-	public float      PreviousApproachRatio_0_to_1 = 0.0f;
+	private float      PreviousApproachRatio_0_to_1 = 0.0f;
 
 	private GameObject Level1GameObject = null;
-	public Vector3    Level1InitialLocalPosition = new Vector3 (-101, -101, -101); // value for bug tracking
-	public Vector3    Level1InitialLocalScale = new Vector3 (-101, -101, -101); // value for bug tracking
+	private Vector3    Level1InitialLocalPosition = new Vector3 (-101, -101, -101); // value for bug tracking
+	private Vector3    Level1InitialLocalScale = new Vector3 (-101, -101, -101); // value for bug tracking
 
 	private GameObject ThisLevelGameObject = null;
-	public string     ThisLevelName = "string not initialized yet";
-	public Vector3    ThisLevelInitialLocalPosition = new Vector3 (-101, -101, -101); // value for bug tracking
-	public Vector3    ThisLevelInitialLocalScale = new Vector3 (-101, -101, -101); // value for bug tracking
-	public int        ThisLevelDepth;
+	private string     ThisLevelName = "string not initialized yet";
+	private Vector3    ThisLevelInitialLocalPosition = new Vector3 (-101, -101, -101); // value for bug tracking
+	private Vector3    ThisLevelInitialLocalScale = new Vector3 (-101, -101, -101); // value for bug tracking
+	private int        ThisLevelDepth;
 
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
