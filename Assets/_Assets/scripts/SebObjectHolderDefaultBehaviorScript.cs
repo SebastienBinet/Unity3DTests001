@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectHolderDefaultBehaviorScript : MonoBehaviour {
+public class SebObjectHolderDefaultBehaviorScript : MonoBehaviour {
 
 	public GameObject ThisLevelGameObject = null;
-	public ObjectHolderDefaultBehaviorScript thisScript;
+	public SebObjectHolderDefaultBehaviorScript thisScript;
 	public string ThisGameObjectName = "";
 	// parent info
 	public GameObject ParentGameObject = null;
@@ -16,7 +16,7 @@ public class ObjectHolderDefaultBehaviorScript : MonoBehaviour {
 	virtual public void Start () {
 
 		// find this Gameobject, which is of type "ObjectHolder" or a derived one.
-		thisScript = GetComponent<ObjectHolderDefaultBehaviorScript>();
+		thisScript = GetComponent<SebObjectHolderDefaultBehaviorScript>();
 		ThisLevelGameObject = thisScript.gameObject;
 		ThisGameObjectName = ThisLevelGameObject.name;
 		// parent info

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GlobalInfoScript : MonoBehaviour {
+public class SebGlobalInfoScript : MonoBehaviour {
 
 	public GameObject CurrentActiveParentLevelGameObject = null;
 

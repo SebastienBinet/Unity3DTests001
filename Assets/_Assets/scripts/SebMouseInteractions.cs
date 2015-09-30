@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MouseInteractions : MonoBehaviour {
+public class SebMouseInteractions : MonoBehaviour {
 
 
 	private GameObject ThisLevelGameObject = null;
 	private GameObject SearchSpotlightInThisLevelGameObject = null;
 	private GameObject FoundSpotlightInThisLevelGameObject = null;
-	private MouseInteractions thisScript;
+	private SebMouseInteractions thisScript;
 	public  bool Fire1JustPressed_oldWay;
 	public  bool Fire2JustPressed_oldWay;
 	private bool IsFire1CurrentlyPressed;
@@ -151,7 +151,7 @@ public class MouseInteractions : MonoBehaviour {
 	}
 
 	void FindTheGameObjectWhereThisScriptIsPlaced() {
-		thisScript = GetComponent<MouseInteractions>();
+		thisScript = GetComponent<SebMouseInteractions>();
 		ThisLevelGameObject = thisScript.gameObject;
 	}
 
@@ -301,7 +301,7 @@ public class MouseInteractions : MonoBehaviour {
 	}
 	GameObject GetCurrentParentGameObject() {
 		GameObject GlobalInfoGameObject = GameObject.Find("GlobalInfo");
-		GlobalInfoScript Script = GlobalInfoGameObject.GetComponent<GlobalInfoScript>();
+		SebGlobalInfoScript Script = GlobalInfoGameObject.GetComponent<SebGlobalInfoScript>();
 		GameObject parent = Script.CurrentActiveParentLevelGameObject;
 		return parent;
 	}

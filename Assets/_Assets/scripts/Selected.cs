@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Selected : StateMachineBehaviour {
@@ -177,10 +177,10 @@ to delete because replaced by a function call */
 				// move forward
 				bbb = 1.0f;
 				// Update the selectables
-				SphereCollider sc = ThisLevelGameObject.GetComponent<SphereCollider> ();
-				if (sc) {
-					sc.enabled = false;
-					Debug.Log ("Setting " + sc.name + ".enabled = false");
+				Collider collider = ThisLevelGameObject.GetComponent<Collider> ();
+				if (collider) {
+					collider.enabled = false;
+					Debug.Log ("Setting " + collider.name + ".enabled = false");
 				} else {
 					// assert because bug
 					Debug.LogError ("========== BUG ttrtreert6");
@@ -188,10 +188,10 @@ to delete because replaced by a function call */
 				SetCurrentActiveParentLevelGameObject (ThisLevelGameObject);
 
 				foreach (Transform trans in ThisLevelGameObject.transform) {
-					SphereCollider sc_child = trans.gameObject.GetComponent<SphereCollider> ();
-					if (sc_child) {
-						sc_child.enabled = true;
-						Debug.Log ("Setting " + sc_child.name + ".enabled = true");
+					Collider collider_child = trans.gameObject.GetComponent<Collider> ();
+					if (collider_child) {
+						collider_child.enabled = true;
+						Debug.Log ("Setting " + collider_child.name + ".enabled = true");
 					} else {
 						// normal situation. Simply ignore.
 					}
@@ -201,19 +201,19 @@ to delete because replaced by a function call */
 				// move backyard
 				bbb = 0.0f;
 				if (ParentGameObject) {
-					SphereCollider sc_parent = ParentGameObject.GetComponent<SphereCollider> ();
-					if (sc_parent) {
-						sc_parent.enabled = false;
-						Debug.Log ("Setting " + sc_parent.name + ".enabled = false");
+					Collider collider_parent = ParentGameObject.GetComponent<Collider> ();
+					if (collider_parent) {
+						collider_parent.enabled = false;
+						Debug.Log ("Setting " + collider_parent.name + ".enabled = false");
 					} else {
 						// assert because bug
 						Debug.LogError ("========== BUG ttrtreert6");
 					}
 				}
-				SphereCollider sc = ThisLevelGameObject.GetComponent<SphereCollider> ();
-				if (sc) {
-					sc.enabled = true;
-					Debug.Log ("Setting " + sc.name + ".enabled = true");
+				Collider collider = ThisLevelGameObject.GetComponent<Collider> ();
+				if (collider) {
+					collider.enabled = true;
+					Debug.Log ("Setting " + collider.name + ".enabled = true");
 				} else {
 					// assert because bug
 					Debug.LogError ("========== BUG ttrtreert6");
@@ -240,7 +240,7 @@ to delete because replaced by a function call */
 	void SetCurrentActiveParentLevelGameObject(GameObject go) {
 		if (go != null) {
 			GameObject GlobalInfoGameObject = GameObject.Find ("GlobalInfo");
-			GlobalInfoScript Script = GlobalInfoGameObject.GetComponent<GlobalInfoScript> ();
+			SebGlobalInfoScript Script = GlobalInfoGameObject.GetComponent<SebGlobalInfoScript> ();
 			Script.CurrentActiveParentLevelGameObject = go;
 		}
 	}

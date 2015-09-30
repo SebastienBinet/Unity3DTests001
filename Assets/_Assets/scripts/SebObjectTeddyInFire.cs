@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SebObjectTeddyInFire : ObjectHolderDefaultBehaviorScript {
+public class SebObjectTeddyInFire : SebObjectHolderDefaultBehaviorScript {
 
 	public GameObject FireGameObject;
 	public GameObject FxFireGameObject;
