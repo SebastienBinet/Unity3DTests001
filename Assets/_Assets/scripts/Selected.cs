@@ -176,54 +176,65 @@ to delete because replaced by a function call */
 			if (bbb > 0.5f) {
 				// move forward
 				bbb = 1.0f;
-				// Update the selectables
-				Collider collider = ThisLevelGameObject.GetComponent<Collider> ();
-				if (collider) {
-					collider.enabled = false;
-					Debug.Log ("Setting " + collider.name + ".enabled = false");
-				} else {
-					// assert because bug
-					Debug.LogError ("========== BUG ttrtreert6");
-				}
+
+				// Update the selectables (this level and sibling levels now become non-selectable)
+				PutThisLevelAndAllSiblingLevels_Non_Selectable();
+
+				// Update the selectables (sub levels of this level now become selectable)
+				PutAllSubLevelsSelectable();
+
 				SetCurrentActiveParentLevelGameObject (ThisLevelGameObject);
 
-				foreach (Transform trans in ThisLevelGameObject.transform) {
-					Collider collider_child = trans.gameObject.GetComponent<Collider> ();
-					if (collider_child) {
-						collider_child.enabled = true;
-						Debug.Log ("Setting " + collider_child.name + ".enabled = true");
-					} else {
-						// normal situation. Simply ignore.
-					}
-				}
-
 			} else {
-				// move backyard
+				// move backward
 				bbb = 0.0f;
-				if (ParentGameObject) {
-					Collider collider_parent = ParentGameObject.GetComponent<Collider> ();
-					if (collider_parent) {
-						collider_parent.enabled = false;
-						Debug.Log ("Setting " + collider_parent.name + ".enabled = false");
-					} else {
-						// assert because bug
-						Debug.LogError ("========== BUG ttrtreert6");
-					}
-				}
-				Collider collider = ThisLevelGameObject.GetComponent<Collider> ();
-				if (collider) {
-					collider.enabled = true;
-					Debug.Log ("Setting " + collider.name + ".enabled = true");
-				} else {
-					// assert because bug
-					Debug.LogError ("========== BUG ttrtreert6");
-				}
+				// Update the selectables (this level and sibling levels now become non-selectable)
+				PutAllSubLevels_Non_Selectable();
+				// Update the selectables (the parent level and its sibling levels now become selectable)
+				PutThisLevelAndAllSiblingLevelsSelectable();
+
 				SetCurrentActiveParentLevelGameObject (ParentGameObject);
 			}
 			PositionLevel1AndSelectedForThisRatio (bbb);
 			animator.SetFloat ("Zero_to_one", bbb);
 		}
 
+	}
+
+	void PutAllSubLevelsSelectable() {
+		SetSelectStateOfAllSublevelsOf (ThisLevelGameObject, true);
+	}
+	void PutAllSubLevels_Non_Selectable() {
+		SetSelectStateOfAllSublevelsOf (ThisLevelGameObject, false);
+	}
+	void PutThisLevelAndAllSiblingLevelsSelectable() {
+		SetSelectStateOfAllSublevelsOf (ParentGameObject, true);
+	}
+	void PutThisLevelAndAllSiblingLevels_Non_Selectable() {
+		SetSelectStateOfAllSublevelsOf (ParentGameObject, false);
+	}
+	void PutParentLevelAndAllSiblingLevelsSelectable() {
+		GameObject GrandParentLevel = GetGrandParentOfThisLevel ();
+		SetSelectStateOfAllSublevelsOf (GrandParentLevel, true);
+	}
+	void PutParentLevelAndAllSiblingLevels_Non_Selectable() {
+		GameObject GrandParentLevel = GetGrandParentOfThisLevel ();
+		SetSelectStateOfAllSublevelsOf (GrandParentLevel, false);
+	}
+
+	// silently ignore nulls
+	void SetSelectStateOfAllSublevelsOf(GameObject LevelOnWhichSubLevelsWillBeAffected, bool StateForLevelsCollider) {
+		if (LevelOnWhichSubLevelsWillBeAffected && LevelOnWhichSubLevelsWillBeAffected.transform) {
+			foreach (Transform trans in LevelOnWhichSubLevelsWillBeAffected.transform) {
+				Collider collider_subLevel = trans.gameObject.GetComponent<Collider> ();
+				if (collider_subLevel) {
+					collider_subLevel.enabled = StateForLevelsCollider;
+					//Debug.Log ("Setting " + collider_subLevel.name + ".enabled = " + (StateForLevelsCollider ? "true" : "false"));
+				} else {
+					// normal situation. Simply ignore.
+				}
+			}
+		}
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
@@ -245,11 +256,21 @@ to delete because replaced by a function call */
 		}
 	}
 
-	GameObject GetParentOfThisLevel() {
-		GameObject ParentOfThisLevel = null;
-		if (ThisLevelGameObject && ThisLevelGameObject.transform && ThisLevelGameObject.transform.parent) {
-			ParentOfThisLevel = ThisLevelGameObject.transform.parent.gameObject;
-		}
-		return ParentOfThisLevel;
+	GameObject GetGrandParentOfThisLevel() {
+		return GetRelativeParentLevelOf (GetRelativeParentLevelOf (ThisLevelGameObject));
 	}
+	GameObject GetParentOfThisLevel() {
+		return GetRelativeParentLevelOf (ThisLevelGameObject);
+	}
+	GameObject GetRelativeParentLevelOf(GameObject LevelOfWhichWeWantTheParent) {
+		GameObject RelativeParent = null;
+		if (LevelOfWhichWeWantTheParent &&
+		    LevelOfWhichWeWantTheParent.transform &&
+		    LevelOfWhichWeWantTheParent.transform.parent) {
+			RelativeParent = LevelOfWhichWeWantTheParent.transform.parent.gameObject;
+		}
+		return RelativeParent;
+	}
+
+
 }
