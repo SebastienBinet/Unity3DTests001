@@ -47,9 +47,9 @@ public class SebObjectTeddyInFire : ObjectHolderDefaultBehaviorScript {
 	// Update is called once per frame
 	override public void Update () {
 		if (ParentGameObject) {
-			Debug.Log ("Now in SebObjectTeddyInFire.cs: " + ParentGameObjectName + "." + ThisGameObjectName + ".update()");
+			// TOO MUCH DEBUG INFO Debug.Log ("Now in SebObjectTeddyInFire.cs: " + ParentGameObjectName + "." + ThisGameObjectName + ".update()");
 		} else {
-			Debug.Log ("Now in SebObjectTeddyInFire.cs: " + "NULL." + ThisGameObjectName + ".update()");
+			// TOO MUCH DEBUG INFO Debug.Log ("Now in SebObjectTeddyInFire.cs: " + "NULL." + ThisGameObjectName + ".update()");
 		}
 
 		// update the fire parameters in function of Level size
@@ -62,7 +62,7 @@ public class SebObjectTeddyInFire : ObjectHolderDefaultBehaviorScript {
 			
 			Vector3 InitialScale = RootAnimatorScript.InitialLocalScale;
 			float ratioCurrentScaleOverInitialScale = currentScale.x / InitialScale.x;
-			Debug.Log ("current ratio=" + ratioCurrentScaleOverInitialScale);
+			// TOO MUCH DEBUG INFO Debug.Log ("current ratio=" + ratioCurrentScaleOverInitialScale);
 			if (FxFireParticleSystem) {
 				FxFireParticleSystem.startSize = 0.57f * ratioCurrentScaleOverInitialScale;
 			} else {

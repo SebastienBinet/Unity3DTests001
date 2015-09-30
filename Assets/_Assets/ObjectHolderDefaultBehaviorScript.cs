@@ -33,9 +33,9 @@ public class ObjectHolderDefaultBehaviorScript : MonoBehaviour {
 //		static bool firstTimeInUpdate = true;
 //		if (firstTimeInUpdate) {
 		if (ParentGameObject) {
-			Debug.Log ("No Behavior in " + ParentGameObjectName + "." + ThisGameObjectName + ".update()");
+			// TOO MUCH DEBUG INFO Debug.Log ("No Behavior in " + ParentGameObjectName + "." + ThisGameObjectName + ".update()");
 		} else {
-			Debug.Log ("No Behavior in " + "NULL." + ThisGameObjectName + ".update()");
+			// TOO MUCH DEBUG INFO Debug.Log ("No Behavior in " + "NULL." + ThisGameObjectName + ".update()");
 		}
 
 		// do not repeat the singleton
