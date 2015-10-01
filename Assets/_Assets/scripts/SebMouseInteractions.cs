@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SebMouseInteractions : MonoBehaviour {
-
+	private const float DRAG_RATIO_FOR_CHANGE_C = 1.0f;
 
 	private GameObject ThisLevelGameObject = null;
 	private GameObject SearchSpotlightInThisLevelGameObject = null;
@@ -70,14 +70,14 @@ public class SebMouseInteractions : MonoBehaviour {
 		if (IsFire1CurrentlyPressed) {
 			// if moved more far, send 1 to 0 to parent
 			if (drag > 0) {
-				SetParent1to0 (0.9f - drag * 1.0f);
+				SetParent1to0 (0.9f - drag * DRAG_RATIO_FOR_CHANGE_C);
 				if (transformHitPrevious) {
 					SetLevel0to1 (0);
 				}
-			} else if (drag < 0) { // else: so it was moved closer
+			} else  { // if (drag < 0) { // else: so it was moved closer
 				// if level was clicked, send 0 to 1 to level
 				if (transformHitPrevious) {
-					SetLevel0to1 (0.1f + drag / -1.0f);
+					SetLevel0to1 (0.05f + drag / (-DRAG_RATIO_FOR_CHANGE_C));
 				}
 				SetParent1to0 (1);
 			}
